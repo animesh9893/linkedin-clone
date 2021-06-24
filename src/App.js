@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import {changeApp} from './Redux/dispatcher'
 
 import './App.css';
 import Home from './Component/Home';
@@ -18,7 +18,9 @@ const PageNotFound = ()=>{
   )
 }
 
+
 function App() {
+  // changeApp("/home")
   return (
     <div className="main-full">
       <div className="nav-fixed"><NavBar /></div>

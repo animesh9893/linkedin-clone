@@ -18,4 +18,23 @@ export const useWindowSize = ()=> {
 
 // export useWindowSize;
 
+// const [url,SetURL]= useState('');
+
+export const AppURL = () =>{
+  const [url,SetURL] =  useState('');
+  return {
+    url,SetURL
+  }
+}
+
+export const setIconState = (url) => {
+  let App = AppURL()
+  console.log(url)
+  App.SetURL(url)
+}
+
+export const GetIconState = () =>{
+  let App = AppURL()
+  return App.url
+}
 

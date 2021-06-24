@@ -6,12 +6,18 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 
-import React, { Component } from 'react';
+import React,{useEffect} from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+import * as functions from '../../Redux/actions';
+import {changeApp,getAppURL} from '../../Redux/dispatcher'
+import {AppStore,Subscribe} from '../../Redux/store'
+
+import {GetIconState} from '../context';
 
 const Icon = (props)=>{
   return (
-    <Link to={props.link} style={{ color: "#000000E6", textDecoration: 'none'}}>
+    <Link to={props.link} onClick={()=>changeApp(props.link)} style={{ color: "#000000E6", textDecoration: 'none'}}>
     <IconContainer>
       <props.icon style={{fontSize:30}}/>
       <div>{props.name}</div>
@@ -21,14 +27,16 @@ const Icon = (props)=>{
   )
 }
 
+
 function IconBar(){
+
 	return (
         <Container>
-          <Icon icon={HomeIcon} active={true} name={"Home"} link="/"/>
-          <Icon icon={PeopleIcon} active={false} name={"My Network"} link="/Network"/>
-          <Icon icon={WorkIcon} active={false} name={"Jobs"} link="/Jobs"/>
-          <Icon icon={TextsmsIcon} active={false} name={"Messaging"} link="/"/>
-          <Icon icon={NotificationsIcon} active={false} name={"Notification"} link="/"/>
+          <Icon icon={HomeIcon} active={GetIconState()===functions.home} name={"Home"} link={functions.home}/>
+          <Icon icon={PeopleIcon} active={GetIconState()===functions.network} name={"My Network"} link={functions.network}/>
+          <Icon icon={WorkIcon} active={GetIconState()===functions.jobs} name={"Jobs"} link={functions.jobs}/>
+          <Icon icon={TextsmsIcon} active={GetIconState()===functions.message} name={"Messaging"} link={functions.message}/>
+          <Icon icon={NotificationsIcon} active={GetIconState()===functions.notification} name={"Notification"} link={functions.notification}/>
 
         </Container>
 	)
