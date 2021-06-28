@@ -1,0 +1,6 @@
+.card-fixed{
+	position: fixed;
+	top: 0;
+	padding-top: 72px;
+	/*transition: 0.01s;*/
+}

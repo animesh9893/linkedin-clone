@@ -1,42 +1,20 @@
 import styled from 'styled-components'
-import HomeIcon from '@material-ui/icons/Home';
-import PeopleIcon from '@material-ui/icons/People';
-import WorkIcon from '@material-ui/icons/Work';
-import TextsmsIcon from '@material-ui/icons/Textsms';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 
+import {IconBarContext} from '../../state/contextURL'
 
-import React,{useEffect} from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-
-import * as functions from '../../Redux/actions';
-import {changeApp,getAppURL} from '../../Redux/dispatcher'
-import {AppStore,Subscribe} from '../../Redux/store'
-
-import {GetIconState} from '../context';
-
-const Icon = (props)=>{
-  return (
-    <Link to={props.link} onClick={()=>changeApp(props.link)} style={{ color: "#000000E6", textDecoration: 'none'}}>
-    <IconContainer>
-      <props.icon style={{fontSize:30}}/>
-      <div>{props.name}</div>
-      {props.active ? <ActiveLine /> : <Padding/>}
-    </IconContainer>
-    </Link>
-  )
-}
-
+import {Link } from 'react-router-dom';
 
 function IconBar(){
-
+  const [data,setData,active,setActive]=IconBarContext()
 	return (
         <Container>
-          <Icon icon={HomeIcon} active={GetIconState()===functions.home} name={"Home"} link={functions.home}/>
-          <Icon icon={PeopleIcon} active={GetIconState()===functions.network} name={"My Network"} link={functions.network}/>
-          <Icon icon={WorkIcon} active={GetIconState()===functions.jobs} name={"Jobs"} link={functions.jobs}/>
-          <Icon icon={TextsmsIcon} active={GetIconState()===functions.message} name={"Messaging"} link={functions.message}/>
-          <Icon icon={NotificationsIcon} active={GetIconState()===functions.notification} name={"Notification"} link={functions.notification}/>
+          {
+            data.map(app =>(
+            <Link to={app.url} onClick={()=>setActive(app.id)} style={{ color: "#000000E6", textDecoration: 'none'}}>
+              <Icon icon={app.logo} active={app.id===active} name={app.name} link={app.url}/>
+            </Link>
+            ))
+          }
 
         </Container>
 	)
@@ -45,9 +23,19 @@ function IconBar(){
 
 export default IconBar;
 
+const Icon = (props)=>{
+  console.log(props.link)
+  return (
+    <IconContainer>
+      <props.icon style={{fontSize:30}}/>
+      <div>{props.name}</div>
+      {props.active ? <ActiveLine /> : <Padding/>}
+    </IconContainer>
+  )
+}
+
+
 const Container= styled.div`
-  // padding-top:1px;
-  // border:1px solid black;
   display:flex;
   align-items:flex-end;
   flex-direction:row;

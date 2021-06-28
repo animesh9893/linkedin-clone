@@ -4,6 +4,7 @@ import pageLogo from './pageLogo.jpg'
 function GroupCard(){
 	return (
 		<Container>
+			<div>
 			<CardContainer>
 				<Image src={pageLogo} />
 				<Heading>Tree With u</Heading>
@@ -15,6 +16,7 @@ function GroupCard(){
 			<Analytics>
 				See visitor analytics
 			</Analytics>
+			</div>
 		</Container>		
 	);
 };
@@ -26,7 +28,7 @@ const Container= styled.div`
 	margin-top:8px;
 	height:auto;
 	border-radius:8px;
-	width:100%;
+	width:225px;
 	background: linear-gradient(180deg, #378fe9 32px, #ffffff 0%);
 `
 
