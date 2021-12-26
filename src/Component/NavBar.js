@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {useWindowSize} from './context';
 
 import Logo from './navbar/Logo';
 import SearchBar from './navbar/SearchBar';
@@ -7,20 +6,13 @@ import IconBar from './navbar/IconBar';
 
 
 function NavBar() {
-  const [width,height]=useWindowSize();
-  console.log(width,height);
-
-  
-
   return (
     <Container>
       <ContainerDiv>
         <Logo/>
         <SearchBar/>
       </ContainerDiv>
-      
       <IconBar/>
-
     </Container>
   );
 }
@@ -39,8 +31,7 @@ const Container = styled.div`
   height:53px;
   width:100vw;
   overflow:hidden;
-  // padding: 14px 16px;
-  padding-left:clamp(10px,5%,100px);
+  padding-left:clamp(10px,20%,150px);
   padding-right:clamp(10px,5%,100px);
 
   &>div{

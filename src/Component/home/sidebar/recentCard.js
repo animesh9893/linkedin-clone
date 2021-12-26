@@ -1,117 +1,22 @@
 import styled from 'styled-components'
-import DateRangeIcon from '@material-ui/icons/DateRange';
 
-import {useState} from 'react';
-import {Link } from 'react-router-dom';
+// import {useState} from 'react';
+// import {Link } from 'react-router-dom';
+
+import {RecentCardContext} from '../../../state/homeSidebarContext';
+import React ,{useContext} from 'react';
+// import {Link} from 'react-router-dom';
+
 
 
 function RecentCard(){
-	const [recentDropDownIcon,setRecentDropDownIcon] = useState(false); 
-	const [recentDropState,setRecentDropState] = useState(true);
-	
-	const [eventDropState,setEventDropState] = useState(true);
-	const [eventDropDownIcon,setEventDropDownIcon] = useState(false); 
 
-	const [hashDropState,setHashDropState] = useState(true);
-	const [hashDropDownIcon,setHashDropDownIcon] = useState(false);
-
-	const groupLink = "/group";
-	const RecentData = [
-		{
-			id:1,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:2,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:3,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:4,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:5,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		}
-	]
-	const EventData = [
-		{
-			id:1,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:2,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:3,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:4,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:5,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		}
-	]
-	const HashData = [
-		{
-			id:1,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:2,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:3,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:4,
-			url:"/RecentData",
-			type:"tag",
-			heading:"nfosdfnsdfskdjf"
-		},
-		{
-			id:5,
-			url:"/RecentData",
-			type:"event",
-			heading:"nfosdfnsdfskdjf"
-		}
-	]
+	const bundle = useContext(RecentCardContext);
+	const [recentDropDownIcon,setRecentDropDownIcon,recentDropState,setRecentDropState,recentData,setRecentData]=bundle.recent
+	const [eventDropState,setEventDropState,eventDropDownIcon,setEventDropDownIcon,eventURL,setEventURL,eventData,setEventData]=bundle.event
+	const [hashDropState,setHashDropState,hashDropDownIcon,setHashDropDownIcon,hashURL,setHashURL,hashData,setHashData]=bundle.hash
+	const [groupURL,setGroupURL]=bundle.group
+	const [discoverURL,setDiscoverURL] = bundle.discover
 	return (
 		<Container>
 			<ContainerDiv>
@@ -123,56 +28,62 @@ function RecentCard(){
 						</RecentDrop>
 					</RecentDiv>
 					{
-						recentDropState && RecentData.map(data=>(
+						recentDropState && recentData.map(data=>(
+							<a href={data.url}>
 							<RecentContent>
 								<Icon>{data.type==="event" ? <CalanderLogo/>:<HashLogo/>}</Icon>
 								<Text>{data.heading}</Text>
 							</RecentContent>
+							</a>
 						))
 					}
 				</div>
 				<div>
 					<Group>
-						<PageLink href={groupLink}>Group</PageLink>
+						<PageLink href={groupURL}>Group</PageLink>
 					</Group>
 				</div>
 				<div>
 					<Bar onMouseEnter={e=>{setEventDropDownIcon(true)}} onMouseLeave={e=>{setEventDropDownIcon(false)}}>
-						<PageLink href={groupLink}>Events</PageLink>
+						<PageLink href={eventURL}>Events</PageLink>
 						<div>
 							<div><AddLogo /></div>
 							<DropButton onClick={e=>setEventDropState(!eventDropState)}>{eventDropDownIcon && <Drop state={eventDropState} />}</DropButton>
 						</div>
 					</Bar>
 					{
-						eventDropState && EventData.map(data=>(
+						eventDropState && eventData.map(data=>(
+							<a href={data.url}>
 							<RecentContent>
 								<Icon>{data.type==="event" ? <CalanderLogo/>:<HashLogo/>}</Icon>
 								<Text>{data.heading}</Text>
 							</RecentContent>
+							</a>
 						))
 					}
 					{ eventDropState && <AllLink href={'/events'}>See all</AllLink> }
 				</div>
 				<div>
 					<Bar onMouseEnter={e=>{setHashDropDownIcon(true)}} onMouseLeave={e=>{setHashDropDownIcon(false)}}>
-						<PageLink href={groupLink}>Followed Hashtags</PageLink>
+						<PageLink href={hashURL}>Followed Hashtags</PageLink>
 						<div>
 							<DropButton onClick={e=>setHashDropState(!hashDropState)}>{hashDropDownIcon && <Drop state={hashDropState} />}</DropButton>
 						</div>
 					</Bar>
 					{
-						hashDropState && HashData.map(data=>(
+						hashDropState && hashData.map(data=>(
+							<a href={data.url}>
 							<RecentContent>
 								<Icon>{data.type==="event" ? <CalanderLogo/>:<HashLogo/>}</Icon>
 								<Text>{data.heading}</Text>
 							</RecentContent>
+							</a>
 						))
 					}
 					{ eventDropState && <AllLink href={'/tags'}>See all</AllLink> }
 				</div>
 				<Discover>
-					Discover more
+					<a href={discoverURL} >Discover more</a>
 				</Discover>
 			</ContainerDiv>
 		</Container>		
@@ -201,6 +112,10 @@ const Discover =styled.div`
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	&>a{
+		text-decoration:none;
+		color:inherit;
+	}
 	:hover{
 		background-color:#eef3f8;
 	}
@@ -318,6 +233,12 @@ const Heading = styled.div`
 
 const ContainerDiv = styled.div`
 	width:225px;
+	&>div{
+		&>a{
+			text-decoration:none;
+			color:inherit;
+		}
+	}
 	:hover{
 		cursor:pointer;
 	}

@@ -5,8 +5,12 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import {useState} from 'react';
+import React, {createContext} from 'react'
 
-export const IconBarContext = () => {
+export const IconBarContext = createContext();
+
+
+export const IconBarProvider = (props) => {
 	const [appIcon, setAppIcon] = useState(
 		[
 		{
@@ -47,5 +51,9 @@ export const IconBarContext = () => {
 	]
 	);
 	const [active,setActive] = useState(1);
-	return [appIcon,setAppIcon,active,setActive];
+	return (
+		<IconBarContext.Provider value={[appIcon,setAppIcon,active,setActive]}>
+			{props.children}
+		</IconBarContext.Provider>
+	);
 };

@@ -1,20 +1,33 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import {Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import Home from './Component/Home';
 import NavBar from './Component/NavBar';
 
+import {UserCardProvider,GroupCardProvider,RecentCardProvider} from './state/homeSidebarContext';
+import {IconBarProvider} from './state/contextURL';
 
 function App() {
+
   return (
-    <div className="main-full">
-      <div className="nav-fixed"><NavBar /></div>
-      <Switch>
-        <Route path="/" component={HomeMain} exact />
-        <Route component={PageNotFound} />
-      </Switch>
-    </div>
+    <UserCardProvider>
+    <GroupCardProvider>
+    <IconBarProvider>
+    <RecentCardProvider>
+
+      <div className="main-full">
+        <div className="nav-fixed"><NavBar /></div>
+        <Switch>
+          <Route path="/" component={HomeMain} exact />
+          <Route component={PageNotFound} />
+        </Switch>
+      </div>
+      
+    </RecentCardProvider>
+    </IconBarProvider>
+    </GroupCardProvider>
+    </UserCardProvider>
   );
 }
 

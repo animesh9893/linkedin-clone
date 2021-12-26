@@ -1,28 +1,40 @@
+import React,{useContext} from 'react'
+
 import styled from 'styled-components'
-import default_bg from '../default_bg.png';
+import default_bg from '../../../img/default_bg.png';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
+import {Link } from 'react-router-dom';
+
+import {UserCardContext} from '../../../state/homeSidebarContext';
+
 function UserCard(){
-	const URL = `https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`
+	const [data,setData] = useContext(UserCardContext)
 	return (
 		<Card>
 			<BackgroundImg src={default_bg}/>
 			<User>
-				<ProfileImg src={URL} />
-				<Name>Animesh Shrivatri</Name>
-				<Discription>STUDENT | FULL STACK DEVELOPER | TRADER</Discription>
+				<ProfileImg src={data.user.picture} />
+				<Link to={data.user.url} style={{ color: "#000000E6", textDecoration: 'none'}}>
+				<Name>{data.user.name}</Name>
+				</Link>
+				<Discription>{data.user.discription}</Discription>
 			</User>
 			<Stats>
-				<div>Who viewed your profile<div>137</div></div>
-				<div>Views of your post<div>689</div></div>
+				<div>Who viewed your profile<div>{data.stats.profile}</div></div>
+				<div>Views of your post<div>{data.stats.post}</div></div>
 			</Stats>
+			<Link to={data.links.premium} style={{ color: "#000000E6", textDecoration: 'none'}}>
 			<Membership>
 				Acess exclusive tools & insights
 				<div><div></div>Try Premium Free for 1 Month</div>
 			</ Membership>
+			</Link>
+			<Link to={data.links.myItems} style={{ color: "#000000E6", textDecoration: 'none'}}>
 			<MyItems>
 				<BookmarkIcon style={{color:"#666666"}}/><div>My items</div>
 			</MyItems>
+			</Link>
 		</Card>
 	);
 };

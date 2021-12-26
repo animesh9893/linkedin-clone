@@ -1,0 +1,119 @@
+.modal {
+	position: absolute;
+	width: 552px;
+	height: 365px;
+	background-color: yellow;
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	background-color: white;
+	opacity: 1;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	padding-top: 80px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-select-user{
+	position: absolute;
+	width: 552px;
+	min-height: 126px;
+	height: auto;
+	background-color: yellow;
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	background-color: white;
+	opacity: 1;	
+}
+
+.overlay-select-user{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	padding-top: 80px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.SelectButton{
+	height: 22px;
+	margin-right: 4px;
+	width: 22px;
+	border-radius: 50px;
+}
+
+.On{
+	height: 12px;
+	width: 12px;
+	border-radius: 50px;
+	border: 6px solid #057642;
+}
+
+.Off{
+	border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.backButton{
+	position: relative;
+	width:32px;
+    height:18px;
+    border-radius: 25px 25px 25px 25px;
+    border: 2px solid #0A66C2;
+    margin-left:8px;
+    padding: 6px 16px;
+    display: flex;
+    color: #0A66C2;
+    font-size: 16px;
+    font-weight: 600;
+    align-items: center;
+}
+.backButton:hover{
+	background-color: #e2f0fe;
+	cursor: pointer;
+	
+}
+
+.saveButton{
+	width:34px;
+    height:20px;
+    border-radius: 25px 25px 25px 25px;
+    margin-left:8px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    background-color: #ebebeb;
+	font-weight: 600;
+	font-size: 16px;
+	cursor: not-allowed;
+}
+
+.saveButton-select{
+	width:34px;
+    height:20px;
+    border-radius: 25px 25px 25px 25px;
+    margin-left:8px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+	background-color: #0a66c2;
+	color: white;
+	font-weight: 600;
+	font-size: 16px;
+	cursor: pointer;
+}

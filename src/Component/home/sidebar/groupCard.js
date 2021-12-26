@@ -1,21 +1,29 @@
 import styled from 'styled-components'
-import pageLogo from './pageLogo.jpg'
+import pageLogo from '../../../img/pageLogo.jpg'
+import {GroupCardContext} from '../../../state/homeSidebarContext';
+import React ,{useContext} from 'react';
+import {Link} from 'react-router-dom';
 
 function GroupCard(){
+	const [data,setData] = useContext(GroupCardContext);
 	return (
 		<Container>
 			<div>
 			<CardContainer>
-				<Image src={pageLogo} />
-				<Heading>Tree With u</Heading>
+				<Image src={data.logo} />
+				<Link to={data.url} style={{ color: "#000000E6", textDecoration: 'none'}}>
+					<Heading>{data.name}</Heading>
+				</Link>
 				<Content>
-					<div>Page notification<div>0</div></div>
-					<div>Page visitor<div>0</div></div>
+					<div>Page notification<div>{data.notification}</div></div>
+					<div>Page visitor<div>{data.visitor}</div></div>
 				</Content>
 			</CardContainer>
+			<Link to={data.analytics} style={{ color: "#000000E6", textDecoration: 'none'}}>
 			<Analytics>
 				See visitor analytics
 			</Analytics>
+			</Link>
 			</div>
 		</Container>		
 	);
@@ -55,6 +63,9 @@ const Heading =styled.div`
 	coursor:pointer;
 	border-bottom: 1px solid rgba(0,0,0,.15);
 	padding-bottom:8px;
+	:hover{
+		text-decoration:underline;
+	}
 `
 const Content =styled.div`
 	font-size:12px;

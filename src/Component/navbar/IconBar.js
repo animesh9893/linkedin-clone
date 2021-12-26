@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 import {IconBarContext} from '../../state/contextURL'
-
+import React,{useContext} from 'react'
 import {Link } from 'react-router-dom';
 
 function IconBar(){
-  const [data,setData,active,setActive]=IconBarContext()
+  const [data,setData,active,setActive]=useContext(IconBarContext);
+  // console.log(setData)
 	return (
         <Container>
           {
@@ -24,7 +25,7 @@ function IconBar(){
 export default IconBar;
 
 const Icon = (props)=>{
-  console.log(props.link)
+  // console.log(props.link)
   return (
     <IconContainer>
       <props.icon style={{fontSize:30}}/>
